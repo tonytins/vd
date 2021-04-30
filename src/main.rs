@@ -11,7 +11,7 @@ struct Opts {
     custom: Option<i32>,
 }
 
-fn roll(dice: i32) -> i32 {
+fn throw(dice: i32) -> i32 {
     let mut rng = rand::thread_rng();
     rng.gen_range(1..dice)
 }
@@ -19,18 +19,19 @@ fn roll(dice: i32) -> i32 {
 fn main() {
     let opts: Opts = Opts::parse();
 
-    if opts.roll.is_some() {
-        match opts.roll.unwrap() {
-            4 => println!("{}", roll(4)),
-            6 => println!("{}", roll(6)),
-            8 => println!("{}", roll(8)),
-            10 => println!("{}", roll(10)),
-            12 => println!("{}", roll(12)),
-            _ => println!("{}", roll(20)),
+    if let Some(roll) = opts.roll {
+        match roll {
+            4 => println!("{}", throw(4)),
+            6 => println!("{}", throw(6)),
+            8 => println!("{}", throw(8)),
+            10 => println!("{}", throw(10)),
+            12 => println!("{}", throw(12)),
+            20 => println!("{}", throw(20)),
+            _ => println!("error: try rolling a 4, 6, 8, 10, 12 or 20.")
         }
-    } else if opts.custom.is_some() {
-        println!("{}", roll(opts.custom.unwrap()));
-    } else {
-        println!("{}", roll(20));
+    } 
+    
+    if let Some(custom) = opts.custom {
+        println!("{}", throw(custom));
     }
 }
