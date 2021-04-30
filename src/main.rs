@@ -1,5 +1,5 @@
 use clap::{AppSettings, Clap};
-use rand::distributions::{Distribution, Uniform};
+use rand::Rng;
 
 #[derive(Clap)]
 #[clap(author, about, version)]
@@ -13,9 +13,7 @@ struct Opts {
 
 fn roll(dice: i32) -> i32 {
     let mut rng = rand::thread_rng();
-    let range = Uniform::from(1..dice);
-
-    range.sample(&mut rng)
+    rng.gen_range(1..dice)
 }
 
 fn main() {
