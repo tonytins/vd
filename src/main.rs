@@ -3,7 +3,7 @@ use rand::Rng;
 
 #[derive(Clap)]
 #[clap(author, about, version)]
-#[clap(setting = AppSettings::ColoredHelp)]
+#[clap(setting = AppSettings::ColorAuto)]
 struct Opts {
     #[clap(short, long)]
     roll: Option<i32>,
@@ -18,7 +18,7 @@ fn throw(dice: i32) -> i32 {
 
 fn main() {
     let opts: Opts = Opts::parse();
-
+    
     if let Some(roll) = opts.roll {
         match roll {
             4 => println!("{}", throw(4)),
@@ -29,7 +29,7 @@ fn main() {
             20 => println!("{}", throw(20)),
             _ => println!("error: try rolling a 4, 6, 8, 10, 12 or 20.")
         }
-    } 
+    }
     
     if let Some(custom) = opts.custom {
         println!("{}", throw(custom));
