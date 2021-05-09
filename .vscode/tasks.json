@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "cargo",
+      "subcommand": "build",
+      "problemMatcher": ["$rustc"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "label": "Rust: cargo build - vd"
+    },
+    {
+      "type": "cargo",
+      "subcommand": "check",
+      "problemMatcher": ["$rustc"],
+      "group": "build",
+      "label": "Rust: cargo check - vd"
+    },
+    {
+      "type": "cargo",
+      "subcommand": "clean",
+      "problemMatcher": ["$rustc"],
+      "group": "clean",
+      "label": "Rust: cargo clean - vd"
+    }
+  ]
+}
