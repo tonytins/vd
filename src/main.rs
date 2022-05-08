@@ -1,25 +1,26 @@
-use clap::{AppSettings, Clap};
+use clap::Parser;
 use rand::Rng;
 
-#[derive(Clap)]
-#[clap(author, about, version)]
-#[clap(setting = AppSettings::ColorAuto)]
-struct Opts {
-    #[clap(short, long)]
+#[derive(Parser, Debug)]
+#[clap(author, version, about, long_about = None)]
+struct Args {
+    #[clap(short, long, help = "Roll from 4, 6, 8, 10, 12, 20 or a custom amount")]
     roll: Option<i32>,
-    #[clap(short, long)]
-    custom: Option<i32>,
 }
 
 /// Rolls the dice
 fn throw(dice: i32) -> i32 {
     let mut rng = rand::thread_rng();
-    rng.gen_range(1..dice)
+    if dice > i32::MAX {
+        panic!("Dice amount too high")
+    } else { // Should
+        rng.gen_range(1..dice)
+    }
 }
 
 fn main() {
-    let opts: Opts = Opts::parse();
-    let msg = "You rolled a:";
+    let opts: Args = Args::parse();
+    let msg = "You rolled a";
 
     // -[r/roll] option
     if let Some(roll) = opts.roll {
@@ -30,12 +31,7 @@ fn main() {
             10 => println!("{} {}", msg, throw(10)),
             12 => println!("{} {}", msg, throw(12)),
             20 => println!("{} {}", msg, throw(20)),
-            _ => println!("error: try rolling a 4, 6, 8, 10, 12 or 20."),
+            _ => println!("{} {}", msg, throw(roll)),
         }
-    }
-
-    // -[c/custom] option
-    if let Some(custom) = opts.custom {
-        println!("{} {}", msg, throw(custom));
     }
 }

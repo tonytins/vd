@@ -24,6 +24,12 @@
       "problemMatcher": ["$rustc"],
       "group": "clean",
       "label": "Rust: cargo clean - vd"
+    },
+    {
+      "type": "cargo",
+      "subcommand": "run",
+      "problemMatcher": ["$rustc"],
+      "label": "Rust: cargo run - vd"
     }
   ]
 }
